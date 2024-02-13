@@ -1,19 +1,10 @@
 package edu.brown.cs.student.main.server;
 
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
-import edu.brown.cs.student.main.activity.Activity;
-import edu.brown.cs.student.main.activity.ActivityAPIUtilities;
+import edu.brown.cs.student.main.datasource.DataSource;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
