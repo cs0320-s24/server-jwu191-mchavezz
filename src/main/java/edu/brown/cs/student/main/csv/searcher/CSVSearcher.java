@@ -36,6 +36,8 @@ public class CSVSearcher {
   // String storing the results of the last search
   private String lastSearchResult;
 
+  private final boolean printResult;
+
   /**
    * Constructor for CSVSearcher class.
    *
@@ -45,11 +47,16 @@ public class CSVSearcher {
    * @param dataDirectory The directory containing the CSV file.
    */
   public CSVSearcher(
-      String filename, boolean hasHeaders, Comparator<String> comparator, Path dataDirectory) {
+      String filename,
+      boolean hasHeaders,
+      Comparator<String> comparator,
+      Path dataDirectory,
+      boolean printResult) {
     this.success = false;
     this.hasHeaders = hasHeaders;
     this.comparator = comparator;
     this.dataDirectory = dataDirectory;
+    this.printResult = printResult;
 
     // Validate the directory to prevent security risks
     if (!validDirectory(filename)) {
@@ -159,7 +166,7 @@ public class CSVSearcher {
         rowFound = true;
         searchResults.append(row);
         searchResults.append("\n");
-        System.out.println(row);
+        if (this.printResult) System.out.println(row);
       }
     }
 
@@ -295,5 +302,9 @@ public class CSVSearcher {
    */
   public String getLastSearchResult() {
     return this.lastSearchResult;
+  }
+
+  public List<List<String>> getData() {
+    return this.data;
   }
 }

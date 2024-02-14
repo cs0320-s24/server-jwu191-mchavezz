@@ -2,10 +2,8 @@ package edu.brown.cs.student.main.server;
 
 import static spark.Spark.after;
 
-import edu.brown.cs.student.main.soup.Soup;
-import edu.brown.cs.student.main.soup.SoupAPIUtilities;
-import java.util.ArrayList;
-import java.util.List;
+import edu.brown.cs.student.main.csv.searcher.CSVSearcher;
+import edu.brown.cs.student.main.datasource.DataSource;
 import spark.Spark;
 
 /**
@@ -48,20 +46,12 @@ public class Server {
 
     // Sets up data needed for the OrderHandler. You will likely not read from local
     // JSON in this sprint.
-    String menuAsJson = SoupAPIUtilities.readInJson("data/menu.json");
-    List<Soup> menu = new ArrayList<>();
-    try {
-      menu = SoupAPIUtilities.deserializeMenu(menuAsJson);
-    } catch (Exception e) {
-      // See note in ActivityHandler about this broad Exception catch... Unsatisfactory, but gets
-      // the job done in the gearup where it is not the focus.
-      e.printStackTrace();
-      System.err.println("Errored while deserializing the menu");
-    }
+    DataSource<CSVSearcher> dataSource = new DataSource<>();
 
     // Setting up the handler for the GET /order and /activity endpoints
-    Spark.get("order", new OrderHandler(menu));
-    Spark.get("activity", new ActivityHandler());
+    Spark.get("load", new LoadHandler(dataSource));
+    Spark.get("search", new SearchHandler(dataSource));
+    Spark.get("view", new ViewHandler(dataSource));
     Spark.init();
     Spark.awaitInitialization();
 

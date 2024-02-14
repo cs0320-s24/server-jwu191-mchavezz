@@ -1,19 +1,22 @@
 package edu.brown.cs.student.main.datasource;
 
-import java.util.ArrayList;
-import java.util.List;
+public class DataSource<T> {
+  T data;
+  boolean dataLoaded;
 
-public class DataSource {
-    List<String> data;
-    public DataSource() {
-        data = new ArrayList<>();
-    }
+  public DataSource() {
+    dataLoaded = false;
+  }
 
-    public void setData(List<String> data) {
-        this.data = data;
-    }
+  public void setData(T data) {
+    this.data = data;
+  }
 
-    public List<String> getData(List<String> data) {
-        return this.data;
-    }
+  public T getData() {
+    return this.data;
+  }
+
+  public boolean dataLoaded() {
+    return this.dataLoaded;
+  }
 }
