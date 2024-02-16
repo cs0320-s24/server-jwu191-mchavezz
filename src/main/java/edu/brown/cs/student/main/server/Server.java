@@ -6,6 +6,9 @@ import edu.brown.cs.student.main.csv.searcher.CSVSearcher;
 import edu.brown.cs.student.main.datasource.DataSource;
 import spark.Spark;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Top-level class for this demo. Contains the main() method which starts Spark and runs the various
  * handlers (2).
@@ -47,9 +50,9 @@ public class Server {
     // Sets up data needed for the OrderHandler. You will likely not read from local
     // JSON in this sprint.
     DataSource<CSVSearcher> dataSource = new DataSource<>();
-
+    Path dataDirectory = Paths.get("C:\\Repos\\GitHub\\BrownCS\\CSCI_0320\\server-jwu191-mchavezz\\data");
     // Setting up the handler for the GET /order and /activity endpoints
-    Spark.get("load", new LoadHandler(dataSource));
+    Spark.get("load", new LoadHandler(dataSource, dataDirectory));
     Spark.get("search", new SearchHandler(dataSource));
     Spark.get("view", new ViewHandler(dataSource));
     Spark.init();

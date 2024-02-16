@@ -15,21 +15,22 @@ import spark.Route;
 
 public class LoadHandler implements Route {
   private final DataSource<CSVSearcher> dataSource;
+  private final Path dataDirectory;
 
-  public LoadHandler(DataSource<CSVSearcher> dataSource) {
+  public LoadHandler(DataSource<CSVSearcher> dataSource, Path dataDirectory) {
     this.dataSource = dataSource;
+    this.dataDirectory = dataDirectory;
   }
 
   public Object handle(Request request, Response response) {
-    Path dataDirectory = Paths.get("TODO");
     Set<String> params = request.queryParams();
     String filePath = request.queryParams("filePath");
 
     Map<String, Object> responseMap = new HashMap<>();
     DefaultCreator creator = new DefaultCreator();
     DefaultComparator comparator = new DefaultComparator();
-    CSVSearcher searcher = new CSVSearcher(filePath, true, comparator, dataDirectory, false);
-    dataSource.setData(searcher);
+    CSVSearcher searcher = new CSVSearcher(filePath, true, comparator, this.dataDirectory, false);
+    this.dataSource.setData(searcher);
     if (searcher.fileSuccessfullyParsed()) {
       responseMap.put("result", "success");
     } else {

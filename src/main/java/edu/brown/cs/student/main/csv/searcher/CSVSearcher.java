@@ -207,7 +207,7 @@ public class CSVSearcher {
         rowFound = true;
         searchResults.append(row);
         searchResults.append("\n");
-        System.out.println(row);
+        if (this.printResult) System.out.println(row);
       }
     }
 
@@ -248,7 +248,7 @@ public class CSVSearcher {
           rowFound = true;
           searchResults.append(row);
           searchResults.append("\n");
-          System.out.println(row);
+          if (this.printResult) System.out.println(row);
           break;
         }
       }

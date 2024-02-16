@@ -27,21 +27,22 @@ public class SearchHandler implements Route {
     Set<String> params = request.queryParams();
     String value = request.queryParams("value");
     String column = request.queryParams("column");
-    CSVSearcher searcher = dataSource.getData();
+    CSVSearcher searcher = this.dataSource.getData();
     boolean searchSuccess = false;
-
-    if (column.matches("(0|[1-9]\\d*)")) {
-      searchSuccess = searcher.search(Integer.parseInt(column), value);
-    } else if (!column.isEmpty()) {
-      searchSuccess = searcher.search(column, value);
-    } else {
+    System.out.println(value);
+    System.out.println(column);
+    if (column == null) {
       searchSuccess = searcher.search(value);
+    } else if (column.matches("(0|[1-9]\\d*)")) {
+      searchSuccess = searcher.search(Integer.parseInt(column), value);
+    } else {
+      searchSuccess = searcher.search(column, value);
     }
 
     if (!searchSuccess) {
       return new SearchFailureResponse("error: Search operation was unsuccessful").serialize();
     }
-    responseMap.put("response_type", "Success");
+
     responseMap.put("result", searcher.getLastSearchResult());
 
     return new SearchSuccessResponse(responseMap).serialize();

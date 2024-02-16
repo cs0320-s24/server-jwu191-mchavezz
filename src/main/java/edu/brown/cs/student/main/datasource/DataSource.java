@@ -5,11 +5,12 @@ public class DataSource<T> {
   boolean dataLoaded;
 
   public DataSource() {
-    dataLoaded = false;
+    this.dataLoaded = false;
   }
 
   public void setData(T data) {
     this.data = data;
+    this.dataLoaded = true;
   }
 
   public T getData() {

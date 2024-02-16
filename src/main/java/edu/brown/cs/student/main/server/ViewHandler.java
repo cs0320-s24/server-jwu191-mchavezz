@@ -19,12 +19,12 @@ public class ViewHandler implements Route {
   }
 
   public Object handle(Request request, Response response) {
-    if (dataSource.dataLoaded()) {
+    if (!dataSource.dataLoaded()) {
       return new ViewFailureResponse("error: Data has not been loaded").serialize();
     }
     Map<String, Object> responseMap = new HashMap<>();
 
-    responseMap.put("data", dataSource.getData().getLastSearchResult());
+    responseMap.put("data", dataSource.getData().getData());
 
     return new ViewSuccessResponse(responseMap).serialize();
   }
