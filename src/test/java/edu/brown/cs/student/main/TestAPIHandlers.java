@@ -47,7 +47,7 @@ public class TestAPIHandlers {
 
         // Mock request with a file path
         Request request = new MockRequest();
-        request.queryParams().add("filePath", "/path/to/file.csv");
+        request.queryParams().add(" ");
 
         // Mock response
         Response response = new MockResponse();
