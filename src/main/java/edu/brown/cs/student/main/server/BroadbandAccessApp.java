@@ -1,12 +1,10 @@
 package edu.brown.cs.student.main.server;
 
-package edu.brown.cs.student.main.server;
-
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.main.csv.creator.CreatorFromRow;
+import edu.brown.cs.student.main.csv.creators.CreatorFromRow;
 import edu.brown.cs.student.main.csv.exceptions.FactoryFailureException;
 import edu.brown.cs.student.main.csv.parser.CSVParser;
 import java.io.FileReader;
@@ -39,12 +37,12 @@ public class BroadbandAccessApp {
 
     private static List<BroadbandAccessData> makeACSRequest(String state, String county) throws IOException {
         // Read the CSV file
-        try (FileReader fileReader = new FileReader("path/to/your/csv/file.csv")) {
+        try (FileReader fileReader = new FileReader("")) {
             // Define the creator for creating objects from CSV rows
             CreatorFromRow<BroadbandAccessData> creator = new BroadbandAccessDataCreator();
 
             // Create a CSVParser instance
-            CSVParser<BroadbandAccessData> csvParser = new CSVParser<>(fileReader, creator);
+            CSVParser<BroadbandAccessData> csvParser = new CSVParser<BroadbandAccessData>(fileReader, creator);
 
             // Return the parsed data
             return csvParser.getData();

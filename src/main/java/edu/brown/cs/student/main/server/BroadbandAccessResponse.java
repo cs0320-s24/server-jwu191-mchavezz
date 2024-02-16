@@ -13,6 +13,6 @@ public class BroadbandAccessResponse {
     public void setDateTime(LocalDateTime now) {
     }
 
-    public void setBroadbandAccessPercentage(double broadbandAccessPercentage) {
+    public void setBroadbandData(List<BroadbandAccessData> broadbandData) {
     }
-
+}
