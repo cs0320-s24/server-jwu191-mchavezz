@@ -35,7 +35,7 @@ public class BroadbandAccessApp {
         });
     }
 
-    private static List<BroadbandAccessData> makeACSRequest(String state, String county) throws IOException {
+    private static List<BroadbandAccessData> makeACSRequest(String state, String county) throws IOException, FactoryFailureException {
         // Read the CSV file
         try (FileReader fileReader = new FileReader("")) {
             // Define the creator for creating objects from CSV rows
@@ -46,10 +46,6 @@ public class BroadbandAccessApp {
 
             // Return the parsed data
             return csvParser.getData();
-        } catch (FactoryFailureException e) {
-            // Handle factory failure exception
-            e.printStackTrace();
-            return null;
         }
     }
 }
