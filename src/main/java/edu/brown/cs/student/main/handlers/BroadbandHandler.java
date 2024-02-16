@@ -1,19 +1,14 @@
-package edu.brown.cs.student.main.server;
+package edu.brown.cs.student.main.handlers;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import edu.brown.cs.student.main.datasource.BroadbandDataSource;
+import edu.brown.cs.student.main.server.BroadbandUtilities;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -34,7 +29,7 @@ public class BroadbandHandler implements Route {
         try {
             String responseString = this.dataSource.sendRequest(state, county, key);
             List<List<String>> deserializedResponse = BroadbandUtilities.deserializeResponse(responseString);
-            responseMap.put("query_time", BroadbandDataSource.getTime());
+            responseMap.put("query_time", BroadbandDataSource.getTime().toString());
             responseMap.put("data", BroadbandUtilities.processResponseList(deserializedResponse));
 
         } catch (Exception e) {

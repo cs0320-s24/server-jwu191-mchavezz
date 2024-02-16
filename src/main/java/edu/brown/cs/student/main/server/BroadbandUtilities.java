@@ -28,6 +28,7 @@ public class BroadbandUtilities {
     }
 
     public static List<List<String>> processResponseList(List<List<String>> response) {
+        response.get(0).set(1, "percentage of households with broadband internet");
         for (List<String> innerList : response) {
             // Truncate the inner list if its size is greater than 2
             if (innerList.size() > 2) {
