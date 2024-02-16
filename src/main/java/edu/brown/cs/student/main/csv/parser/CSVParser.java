@@ -18,13 +18,13 @@ import java.util.regex.Pattern;
 public class CSVParser<T> {
 
   // BufferedReader to read the CSV file
-  private BufferedReader br;
+  private final BufferedReader br;
 
   // Interface for creating objects from CSV rows
-  private CreatorFromRow<T> creator;
+  private final CreatorFromRow<T> creator;
 
   // List to store the parsed data
-  private List<T> data;
+  private final List<T> data;
 
   // Indicator for whether parsing was successful
   private boolean success;

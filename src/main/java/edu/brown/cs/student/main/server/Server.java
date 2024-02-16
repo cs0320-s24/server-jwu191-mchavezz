@@ -3,9 +3,14 @@ package edu.brown.cs.student.main.server;
 import static spark.Spark.after;
 
 import edu.brown.cs.student.main.csv.searcher.CSVSearcher;
+import edu.brown.cs.student.main.datasource.BroadbandDataSource;
 import edu.brown.cs.student.main.datasource.DataSource;
 import spark.Spark;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -50,15 +55,22 @@ public class Server {
     // Sets up data needed for the OrderHandler. You will likely not read from local
     // JSON in this sprint.
     DataSource<CSVSearcher> dataSource = new DataSource<>();
-    Path dataDirectory = Paths.get("C:\\Repos\\GitHub\\BrownCS\\CSCI_0320\\server-jwu191-mchavezz\\data");
-    // Setting up the handler for the GET /order and /activity endpoints
-    Spark.get("load", new LoadHandler(dataSource, dataDirectory));
-    Spark.get("search", new SearchHandler(dataSource));
-    Spark.get("view", new ViewHandler(dataSource));
-    Spark.init();
-    Spark.awaitInitialization();
+    try {
+      BroadbandDataSource broadbandDataSource = new BroadbandDataSource();
+      Path dataDirectory = Paths.get("C:\\Repos\\GitHub\\BrownCS\\CSCI_0320\\server-jwu191-mchavezz\\data");
+      // Setting up the handler for the GET /order and /activity endpoints
+      Spark.get("load", new LoadHandler(dataSource, dataDirectory));
+      Spark.get("search", new SearchHandler(dataSource));
+      Spark.get("view", new ViewHandler(dataSource));
+      Spark.get("broadband", new BroadbandHandler(broadbandDataSource));
+      Spark.init();
+      Spark.awaitInitialization();
 
-    // Notice this link alone leads to a 404... Why is that?
-    System.out.println("Server started at http://localhost:" + port);
+      // Notice this link alone leads to a 404... Why is that?
+      System.out.println("Server started at http://localhost:" + port);
+    }
+    catch(Exception e) {
+      System.out.println(e.toString());
+    }
   }
 }

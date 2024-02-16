@@ -46,7 +46,7 @@ public class BroadbandAccessApp {
 
             // Return the parsed data
             return csvParser.getData();
-        } catch (FactoryFailureException e) {
+        } catch (IOException e) {
             // Handle factory failure exception
             e.printStackTrace();
             return null;

@@ -29,8 +29,7 @@ public class SearchHandler implements Route {
     String column = request.queryParams("column");
     CSVSearcher searcher = this.dataSource.getData();
     boolean searchSuccess = false;
-    System.out.println(value);
-    System.out.println(column);
+
     if (column == null) {
       searchSuccess = searcher.search(value);
     } else if (column.matches("(0|[1-9]\\d*)")) {
