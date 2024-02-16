@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.brown.cs.student.main.datasource.BroadbandDataSource;
-import edu.brown.cs.student.main.server.BroadbandUtilities;
+import edu.brown.cs.student.main.utilities.BroadbandUtilities;
 import spark.Request;
 import spark.Response;
 import spark.Route;
