@@ -24,8 +24,6 @@ import java.nio.file.Paths;
  * all had the same shared state.
  */
 public class Server {
-  // TODO 0: Read through this class and determine the shape of this project...
-  // What are the endpoints that we can access... What happens if you go to them?
   public static void main(String[] args) {
     int port = 3232;
     Spark.port(port);

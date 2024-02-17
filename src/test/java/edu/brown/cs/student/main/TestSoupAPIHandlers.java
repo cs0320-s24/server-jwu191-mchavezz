@@ -3,7 +3,6 @@ package edu.brown.cs.student.main;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.squareup.moshi.Moshi;
-import edu.brown.cs.student.main.server.ActivityHandler;
 import edu.brown.cs.student.main.server.OrderHandler;
 import edu.brown.cs.student.main.soup.Soup;
 import java.io.IOException;
